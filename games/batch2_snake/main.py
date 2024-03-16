@@ -13,7 +13,7 @@ pygame.display.set_caption('BATCH2_SNAKE')
 
 # Set up the game variables
 snake_size = 10
-snake_speed = 15
+snake_speed = 10
 snake_color = (0, 255, 0)
 snake_pos = [window_width/2, window_height/2]
 snake_body = [snake_pos.copy(), [snake_pos[0]-snake_size, snake_pos[1]], [snake_pos[0]-2*snake_size, snake_pos[1]]] # List of list structure - [[1, 2], [3, 4], [5, 6]] - 2d matrix
@@ -48,14 +48,13 @@ def move_snake(direction, snake_body):
         head[1] -= snake_size
     elif direction == 'DOWN':
         head[1] += snake_size
-
     snake_body.insert(0, head)
     snake_body.pop()
 
 
 def check_collision(snake_body):
     # [window_width/2, window_height/2] Snake head [x, y]
-    if snake_body[0][0] < 0 or snake_body[0][0] >= window_width or snake_body[0][1] < 0 or snake_body[0][1] >= window_height:
+    if snake_body[0][0] < 0 or snake_body[0][0] >= window_width or snake_body[0][1] < 0 or snake_body[0][1] >= window_height or snake_body[0] in snake_body[1:]:
         return True
     return False
 
@@ -99,7 +98,7 @@ while running:
         food_pos = [random.randrange(0, window_width-food_size, snake_size), random.randrange(0, window_height-food_size, snake_size)]
 
     # Draw everything
-
+    
     window.fill((0, 0, 0))
     draw_snake(snake_body)
     draw_food(food_pos)
@@ -112,14 +111,3 @@ while running:
 
 # Quit Game
 pygame.quit()
-
-
-
-
-
-
-
-
-
-
-
