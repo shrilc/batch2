@@ -11,31 +11,41 @@ window_height = 400
 window = pygame.display.set_mode((window_width, window_height)) # positonal arugments
 pygame.display.set_caption('BATCH2_SNAKE')
 
-# Set up the game variables
+
+# Images for snake and food
+
+egg_image = pygame.image.load('snake_images/egg.png').convert_alpha()
+egg_image = pygame.transform.scale(egg_image, (40, 40))
+
+
+#Set up the game variables
 snake_size = 10
-snake_speed = 15
+snake_speed = 7
 snake_color = (0, 255, 0)
 snake_pos = [window_width/2, window_height/2]
 snake_body = [snake_pos.copy(), [snake_pos[0]-snake_size, snake_pos[1]], [snake_pos[0]-2*snake_size, snake_pos[1]]] # List of list structure - [[1, 2], [3, 4], [5, 6]] - 2d matrix
 direction = 'RIGHT'
 
-food_size = snake_size
+food_size = 20
+foods = [(egg_image, "EGG")]
 food_color = (255, 0, 0)
 food_pos = [random.randrange(0, window_width-food_size, snake_size), random.randrange(0, window_height-food_size, snake_size)]
+food_image, food_type = random.choice(foods)
 
 score = 0
+level = 1
 
 running = True # Flag
 clock = pygame.time.Clock()
 
-
-def draw_snake(snake_body):
+def draw_snake(self):
     for pos in snake_body:
         pygame.draw.rect(window, snake_color, pygame.Rect(pos[0], pos[1], snake_size, snake_size))
 
 
-def draw_food(food_pos):
-    pygame.draw.rect(window, food_color, pygame.Rect(food_pos[0], food_pos[1], food_size, food_size))
+def draw_food(food_image, food_pos):
+    #pygame.draw.rect(window, food_color, pygame.Rect(food_pos[0], food_pos[1], food_size, food_size))
+    window.blit(food_image, food_pos)
 
 
 def move_snake(direction, snake_body):
@@ -73,6 +83,11 @@ def update_score(score):
     window.blit(text, (10, 10))
 
 
+def update_level(level):
+    font = pygame.font.Font(None, 30)
+    text = font.render('Level: ' + str(score), True, (255, 255, 255))
+    window.blit(text, (window_width-100, 10))
+
 # Game loop
 while running:
     # Handle events
@@ -96,14 +111,21 @@ while running:
 
     if eat_food(snake_body, food_pos):
         score += 1
+        if score % 5 == 0:
+            level += 1
+            snake_speed += 5
         food_pos = [random.randrange(0, window_width-food_size, snake_size), random.randrange(0, window_height-food_size, snake_size)]
+        food_image, food_type = random.choice(foods)
+        food_image = pygame.transform.scale(food_image, (40, 40))
+
 
     # Draw everything
 
     window.fill((0, 0, 0))
     draw_snake(snake_body)
-    draw_food(food_pos)
+    draw_food(food_image, food_pos)
     update_score(score)
+    update_level(level)
     pygame.display.update()
 
     # Set the game speed
@@ -112,14 +134,3 @@ while running:
 
 # Quit Game
 pygame.quit()
-
-
-
-
-
-
-
-
-
-
-
