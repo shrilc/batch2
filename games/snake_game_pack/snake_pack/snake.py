@@ -2,6 +2,9 @@ import pygame
 
 
 class Snake:
+    """
+    This is a snake blueprint which draw snake ,eats food and then check whether head collides with borders.
+    """
     def __init__(self, pos, size, speed, color):
         self.size = size
         self.pos = pos
@@ -39,3 +42,16 @@ class Snake:
             return True
         return False
 
+
+class Python(Snake):
+    pass
+
+
+def anything():
+    pass
+
+
+if __name__ == "__main__":
+    snake = Snake(pos=[30, 30], size=30, speed=5, color='green')
+    print("dir: ", dir(snake))
+    print("help: ", help(snake))

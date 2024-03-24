@@ -14,15 +14,16 @@ class Food:
 
     def draw(self, window):
         pygame.draw.rect(window, self.color, pygame.Rect(self.pos[0], self.pos[1], self.size, self.size))
-        # window.blit(food_image, food_pos)
 
 
-class EggFood(Food):
-    def __init__(self):
-        pass
+class ImageFood(Food):
+    def __init__(self, size, color, window_width, window_height, image_path):
+        super().__init__(size, color, window_width, window_height)
+        self.image = pygame.image.load(image_path).convert_alpha()
+        self.image = pygame.transform.scale(self.image, (self.size, self.size))
 
     def draw(self, window):
-        pass
+        window.blit(self.image, self.pos)
 
 
 if __name__ == "__main__":

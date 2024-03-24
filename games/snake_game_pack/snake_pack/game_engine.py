@@ -1,6 +1,8 @@
+import random
+
 import pygame
 from snake import Snake
-from food import Food
+from food import ImageFood, Food
 
 
 class Game:
@@ -20,12 +22,37 @@ class Game:
             speed=7,
             color=(0, 255, 0)
         )
-        self.food = Food(
+        # self.food = Food(
+        #     size=20,
+        #     color=(255, 0, 0),
+        #     window_width=window_width,
+        #     window_height=window_height
+        # )
+        self.egg = ImageFood(
             size=20,
             color=(255, 0, 0),
             window_width=window_width,
-            window_height=window_height
+            window_height=window_height,
+            image_path='egg.png'
         )
+
+        self.mouse = ImageFood(
+            size=20,
+            color=(255, 0, 0),
+            window_width=window_width,
+            window_height=window_height,
+            image_path='mouse.png'
+        )
+
+        self.milk = ImageFood(
+            size=20,
+            color=(255, 0, 0),
+            window_width=window_width,
+            window_height=window_height,
+            image_path='milk.png'
+        )
+
+        self.food = random.choice([self.egg, self.milk, self.mouse])
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -69,12 +96,31 @@ class Game:
             if self.score % 5 == 0:
                 self.level += 1
                 self.snake.speed += 5
-            self.food = Food(
-                size=self.snake.size,
+            self.food = random.choice([
+            ImageFood(
+                size=20,
                 color=(255, 0, 0),
                 window_width=self.window_width,
-                window_height=self.window_height
+                window_height=self.window_height,
+                image_path='egg.png'
+            ),
+            ImageFood(
+                size=20,
+                color=(255, 0, 0),
+                window_width=self.window_width,
+                window_height=self.window_height,
+                image_path='mouse.png'
+            ),
+            ImageFood(
+                size=20,
+                color=(255, 0, 0),
+                window_width=self.window_width,
+                window_height=self.window_height,
+                image_path='milk.png'
             )
+            ])
+
+            self.update_game()
 
     def run(self):
         while self.running:
