@@ -53,12 +53,11 @@ class CLI:
         books = self.library.get_all_books()
         if books:
             for book in books:
-                print(book)
-                # print(f"ID: {book.id}")
-                # print(f"Title: {book.title}")
-                # print(f"Author: {book.author}")
-                # print(f"ISBN: {book.isbn}")
-                # print("")
+                print(f"ID: {book['id']}")
+                print(f"Title: {book['title']}")
+                print(f"Author: {book['author']}")
+                print(f"ISBN: {book['isbn']}")
+                print("")
         else:
             print("No books found.")
 
