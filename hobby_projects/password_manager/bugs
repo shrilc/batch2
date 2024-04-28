@@ -1,0 +1,3 @@
+* On select of record, accounts data not repopulated on input texts
+* update functionality not working as expected - creates new records instead of updating
+* delete functionality not working as expected - crashes the application with keyerror

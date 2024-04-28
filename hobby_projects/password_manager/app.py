@@ -6,7 +6,7 @@ import json
 app = Flask(__name__)
 
 # File where i want to store the password
-PASSWORD_FILE = '/Users/shrilc/IdeaProjects/shrilc/batch2/hobby_projects/secrets/passwords.json'
+PASSWORD_FILE = '/Users/shrilc/IdeaProjects/shrilc/batch2/hobby_projects/secrets/test_passwords.json'
 
 # # plain json approach
 #
