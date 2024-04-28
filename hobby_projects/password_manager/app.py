@@ -37,5 +37,27 @@ def add_password():
     return jsonify({"id": id})
 
 
+# update password
+@app.route('/passwords/update/<string:id>', methods=['PUT'])
+def update_password(id):
+    if id in passwords:
+        data = request.json
+        passwords[id]['username'] = data['username']
+        passwords[id]['password'] = data['password']
+        return jsonify({"message": "Records updated"})
+    else:
+        return jsonify({"error": "Password record not found"})
+
+
+# delete password
+@app.route('/passwords/delete/<string:id>', methods=['DELETE'])
+def delete_password(id):
+    if id in passwords:
+        del passwords[id]
+        return jsonify({"message": "Records deleted"})
+    else:
+        return jsonify({"error": "Password record not found"})
+
+
 if __name__ == "__main__":
     app.run(debug=True)
