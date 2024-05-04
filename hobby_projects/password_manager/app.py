@@ -17,6 +17,10 @@ PASSWORD_FILE = '/Users/shrilc/IdeaProjects/shrilc/batch2/hobby_projects/secrets
 
 
 def read_passwords():
+    """
+    Reads password from json file.
+    :return: json object of passwords
+    """
     with open(PASSWORD_FILE, 'r') as f:
         return json.load(f)
 
