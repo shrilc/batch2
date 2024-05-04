@@ -1,0 +1,7 @@
+* On select of record, accounts data not repopulated on input texts                         --DONE--
+* update functionality not working as expected - creates new records instead of updating    --DONE--
+* delete functionality not working as expected - crashes the application with keyerror      --DONE--
+
+
+* selected rows are not highlighted anymore
+* double-clicking a row gives an error
